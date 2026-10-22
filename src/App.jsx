@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
-import Header from './components/Header'; // Импортируем шапку
+import Header from './components/Header';
 import NewsCard from './components/NewsCard';
 
 function App() {
+  // НОВОЕ: Состояние текущей страницы (по умолчанию 'news')
+  const [currentPage, setCurrentPage] = useState('news');
+  
   const [newsData, setNewsData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedNews, setSelectedNews] = useState(null);
@@ -36,41 +39,63 @@ function App() {
     setSelectedNews(null);
   };
 
+  // НОВОЕ: Функция для переключения страниц
+  const handleNavigate = (pageId) => {
+    setCurrentPage(pageId);
+  };
+
+  // НОВОЕ: Рендерим контент в зависимости от текущей страницы
+  const renderContent = () => {
+    if (currentPage === 'news') {
+      return (
+        <>
+          <header>
+            <h2>Новости и статьи</h2>
+          </header>
+          <input 
+            type="text" 
+            placeholder="Поиск по новостям..." 
+            value={searchTerm} 
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={{ padding: '10px', width: '300px', margin: '20px 0', borderRadius: '5px', border: '1px solid #ccc' }}
+          />
+          <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+            {filteredNews.length === 0 ? (
+              <p>Ничего не найдено.</p>
+            ) : (
+              filteredNews.map((post) => (
+                <NewsCard 
+                  key={post.id} 
+                  title={post.title} 
+                  body={post.body.slice(0, 60) + '...'}
+                  date={new Date(post.date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })} 
+                  onClick={() => handleCardClick(post)}
+                />
+              ))
+            )}
+          </div>
+        </>
+      );
+    }
+
+    // Заглушки для остальных страниц
+    if (currentPage === 'books') return <h2>Книги СССР (скоро)</h2>;
+    if (currentPage === 'farfor') return <h2>Фарфор (скоро)</h2>;
+    if (currentPage === 'money') return <h2>Монеты (скоро)</h2>;
+    if (currentPage === 'vintagethings') return <h2>Винтажные вещи (скоро)</h2>;
+    if (currentPage === 'contacts') return <h2>Контакты (скоро)</h2>;
+    
+    // Главная страница
+    return <h2>Добро пожаловать в Винтажные чудеса!</h2>;
+  };
+
   return (
-    // Обертка container, как в старом проекте
     <div className="container">
-      {/* Вставляем шапку */}
-      <Header />
+      {/* Передаем текущую страницу и функцию переключения в шапку */}
+      <Header currentPage={currentPage} onNavigate={handleNavigate} />
 
-      {/* Основной контент */}
       <main className="content">
-        <header>
-          <h2>Новости и статьи</h2>
-        </header>
-
-        <input 
-          type="text" 
-          placeholder="Поиск по новостям..." 
-          value={searchTerm} 
-          onChange={(e) => setSearchTerm(e.target.value)}
-          style={{ padding: '10px', width: '300px', margin: '20px 0', borderRadius: '5px', border: '1px solid #ccc' }}
-        />
-
-        <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-          {filteredNews.length === 0 ? (
-            <p>Ничего не найдено.</p>
-          ) : (
-            filteredNews.map((post) => (
-              <NewsCard 
-                key={post.id} 
-                title={post.title} 
-                body={post.body.slice(0, 60) + '...'}
-                date={new Date(post.date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })} 
-                onClick={() => handleCardClick(post)}
-              />
-            ))
-          )}
-        </div>
+        {renderContent()}
       </main>
 
       {isModalOpen && selectedNews && (

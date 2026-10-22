@@ -142,3 +142,8 @@ body {
   color: #b8651b;
   margin-bottom: 30px;
 }
+
+.menu-item.active {
+  background-color: #b8651b;
+  color: #fff;
+}
