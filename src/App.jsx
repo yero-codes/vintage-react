@@ -5,6 +5,7 @@ import ContactForm from './components/ContactForm';
 import BooksPage from './components/BooksPage';
 import FarforPage from './components/FarforPage';
 import MoneyPage from './components/MoneyPage';
+import VintagePage from './components/VintagePage';
 
 function App() {
   // НОВОЕ: Состояние текущей страницы (по умолчанию 'news')
@@ -86,7 +87,7 @@ function App() {
     if (currentPage === 'books') return <BooksPage />;
     if (currentPage === 'farfor') return <FarforPage />;
     if (currentPage === 'money') return <MoneyPage />;
-    if (currentPage === 'vintagethings') return <h2>Винтажные вещи (скоро)</h2>;
+    if (currentPage === 'vintagethings') return <VintagePage />;
     if (currentPage === 'contacts') return <ContactForm />;
     
     // Главная страница

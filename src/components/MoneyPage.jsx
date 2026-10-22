@@ -11,7 +11,8 @@ function MoneyPage() {
     { id: 5, img: 'money5.jpg', title: 'Коллекция монет' },
     { id: 6, img: 'money6.jpg', title: 'Коллекция монет' } ,
     { id: 7, img: 'money7.jpg', title: 'Fauna del Caribe I' },
-    { id: 8, img: 'money8.jpg', title: 'Fauna del Caribe II' } ];
+    { id: 8, img: 'money8.jpg', title: 'Fauna del Caribe II' } 
+  ];
 
   const [selectedMoney, setSelectedMoney] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);

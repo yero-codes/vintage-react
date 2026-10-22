@@ -11,7 +11,10 @@ function FarforPage() {
     { id: 5, img: 'yakut.jpg', title: 'Якут с собакой' },
     { id: 6, img: 'beer.jpg', title: 'Олимпиада 1980' } ,
     { id: 7, img: 'cameo.jpg', title: 'Чайная пара "Cameo"' },
-    { id: 8, img: 'lady.jpg', title: 'Леди в шляпке' } ];
+    { id: 8, img: 'lady.jpg', title: 'Леди в шляпке' } ,
+    { id: 9, img: 'snowman.jpg', title: 'Снеговик' }
+  ]
+
 
   const [selectedFarfor, setSelectedFarfor] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
