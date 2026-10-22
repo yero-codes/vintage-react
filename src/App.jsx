@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import NewsCard from './components/NewsCard';
+import ContactForm from './components/ContactForm';
 
 function App() {
   // НОВОЕ: Состояние текущей страницы (по умолчанию 'news')
@@ -83,7 +84,7 @@ function App() {
     if (currentPage === 'farfor') return <h2>Фарфор (скоро)</h2>;
     if (currentPage === 'money') return <h2>Монеты (скоро)</h2>;
     if (currentPage === 'vintagethings') return <h2>Винтажные вещи (скоро)</h2>;
-    if (currentPage === 'contacts') return <h2>Контакты (скоро)</h2>;
+    if (currentPage === 'contacts') return <ContactForm />;
     
     // Главная страница
     return <h2>Добро пожаловать в Винтажные чудеса!</h2>;
