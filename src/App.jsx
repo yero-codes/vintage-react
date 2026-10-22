@@ -3,6 +3,7 @@ import Header from './components/Header';
 import NewsCard from './components/NewsCard';
 import ContactForm from './components/ContactForm';
 import BooksPage from './components/BooksPage';
+import FarforPage from './components/FarforPage';
 
 function App() {
   // НОВОЕ: Состояние текущей страницы (по умолчанию 'news')
@@ -82,7 +83,7 @@ function App() {
 
     // Заглушки для остальных страниц
     if (currentPage === 'books') return <BooksPage />;
-    if (currentPage === 'farfor') return <h2>Фарфор (скоро)</h2>;
+    if (currentPage === 'farfor') return <FarforPage />;
     if (currentPage === 'money') return <h2>Монеты (скоро)</h2>;
     if (currentPage === 'vintagethings') return <h2>Винтажные вещи (скоро)</h2>;
     if (currentPage === 'contacts') return <ContactForm />;

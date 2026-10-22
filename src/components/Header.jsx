@@ -3,7 +3,7 @@ function Header({ currentPage, onNavigate }) {
   const menuItems = [
     { id: 'home', label: 'Главная' },
     { id: 'books', label: 'Книги СССР' },
-    { id: 'farfor', label: 'Фарфор' },
+    { id: 'farfor', label: 'Фарфор CCCP' },
     { id: 'money', label: 'Монеты' },
     { id: 'vintagethings', label: 'Винтажные вещи' },
     { id: 'news', label: 'Новости' },
