@@ -179,3 +179,41 @@ body {
 .card:hover .card-figure figcaption {
   opacity: 1;
 }
+
+/* ===== Адаптив для телефонов и планшетов ===== */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    padding: 20px;
+  }
+
+  .logo {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .menu {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .menu-item {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .content {
+    padding: 20px;
+  }
+
+  .content h2 {
+    font-size: 24px;
+  }
+}

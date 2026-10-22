@@ -6,10 +6,11 @@ import BooksPage from './components/BooksPage';
 import FarforPage from './components/FarforPage';
 import MoneyPage from './components/MoneyPage';
 import VintagePage from './components/VintagePage';
+import HomePage from './components/HomePage';
 
 function App() {
   // НОВОЕ: Состояние текущей страницы (по умолчанию 'news')
-  const [currentPage, setCurrentPage] = useState('news');
+  const [currentPage, setCurrentPage] = useState('home');
   
   const [newsData, setNewsData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -91,7 +92,7 @@ function App() {
     if (currentPage === 'contacts') return <ContactForm />;
     
     // Главная страница
-    return <h2>Добро пожаловать в Винтажные чудеса!</h2>;
+      return <HomePage />;
   };
 
   return (
