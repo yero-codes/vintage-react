@@ -1,6 +1,7 @@
-function NewsCard({ title, body, date }) {
+function NewsCard({ title, body, date, onClick }) {
   return (
-    <article className="card">
+    // Добавили onClick и style={{ cursor: 'pointer' }}
+    <article className="card" onClick={onClick} style={{ cursor: 'pointer' }}>
       <div className="news-placeholder">Новость</div>
       <div className="date">{date}</div>
       <h3>{title}</h3>

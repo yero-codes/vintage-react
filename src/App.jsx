@@ -6,6 +6,11 @@ function App() {
   // 1. Добавляем состояние для поискового запроса
   const [searchTerm, setSearchTerm] = useState('');
 
+  //  Состояние для выбранной новости и открытия модалки
+  const [selectedNews, setSelectedNews] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
   useEffect(() => {
     fetch('/data.json')
       .then((response) => response.json())
@@ -24,6 +29,18 @@ function App() {
       post.body.toLowerCase().includes(term)
     );
   });
+
+  //  Функция для открытия модалки
+  const handleCardClick = (newsItem) => {
+    setSelectedNews(newsItem); // Запоминаем, какую новость выбрали
+    setIsModalOpen(true);      // Открываем модалку
+  };
+
+  //  Функция для закрытия модалки
+  const handleCloseModal = () => {
+    setIsModalOpen(false);     // Закрываем
+    setSelectedNews(null);     // Очищаем выбранную новость
+  };
 
   return (
     <div style={{ padding: '20px' }}>
@@ -49,10 +66,22 @@ function App() {
               title={post.title} 
               body={post.body.slice(0, 60) + '...'}
               date={new Date(post.date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })} 
+               //  Передаем функцию клика в карточку
+              onClick={() => handleCardClick(post)}
             />
           ))
         )}
       </div>
+      {/*  Модальное окно (рендерится только если isModalOpen === true) */}
+      {isModalOpen && selectedNews && (
+        <div className="modal-overlay" onClick={handleCloseModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h2>{selectedNews.title}</h2>
+            <p>{selectedNews.body}</p>
+            <button onClick={handleCloseModal}>Закрыть</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
