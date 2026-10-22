@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import NewsCard from './components/NewsCard';
 import ContactForm from './components/ContactForm';
+import BooksPage from './components/BooksPage';
 
 function App() {
   // НОВОЕ: Состояние текущей страницы (по умолчанию 'news')
@@ -80,7 +81,7 @@ function App() {
     }
 
     // Заглушки для остальных страниц
-    if (currentPage === 'books') return <h2>Книги СССР (скоро)</h2>;
+    if (currentPage === 'books') return <BooksPage />;
     if (currentPage === 'farfor') return <h2>Фарфор (скоро)</h2>;
     if (currentPage === 'money') return <h2>Монеты (скоро)</h2>;
     if (currentPage === 'vintagethings') return <h2>Винтажные вещи (скоро)</h2>;
