@@ -122,9 +122,11 @@ body {
 .menu-item {
   color: #f5efe6;
   text-decoration: none;
-  padding: 10px 15px;
+  padding: 12px 15px;
   border-radius: 6px;
   transition: all 0.3s;
+  font-size: 18px; /* <--- Увеличиваем шрифт (если надо) */
+  font-family: 'Georgia', serif; /* Наследуем шрифт сайта */
 }
 
 .menu-item:hover {
