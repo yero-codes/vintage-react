@@ -7,6 +7,7 @@ import FarforPage from './components/FarforPage';
 import MoneyPage from './components/MoneyPage';
 import VintagePage from './components/VintagePage';
 import HomePage from './components/HomePage';
+import AudioPlayer from './components/AudioPlayer';
 
 function App() {
   // НОВОЕ: Состояние текущей страницы (по умолчанию 'news')
@@ -113,6 +114,7 @@ function App() {
           </div>
         </div>
       )}
+      <AudioPlayer />
     </div>
   );
 }
