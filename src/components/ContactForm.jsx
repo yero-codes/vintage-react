@@ -58,11 +58,6 @@ function ContactForm() {
             alt="Лавка винтажных вещей" 
             style={{ width: '100%', borderRadius: '8px', objectFit: 'cover' }} 
           />
-          <img 
-            src={`${import.meta.env.BASE_URL}images/shop1.jpg`} 
-            alt="Лавка антикварная" 
-            style={{ width: '100%', borderRadius: '8px', objectFit: 'cover' }} 
-          />
         </div>
 
         {/* ПРАВАЯ КОЛОНКА: Форма */}
@@ -118,7 +113,7 @@ function ContactForm() {
 
         <div style={{ marginTop: '20px', borderRadius: '8px', overflow: 'hidden' }}>
           <iframe 
-            src="https://yandex.ru/map-widget/v1/?um=constructor%3A5e6e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e3e&amp;source=constructor" 
+             src="https://yandex.ru/map-widget/v1/?ll=82.920430%2C55.030199&z=16&pt=82.920430,55.030199,pm2rdm" 
             width="100%" 
             height="400" 
             frameBorder="0"
