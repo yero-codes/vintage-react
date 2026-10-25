@@ -9,6 +9,8 @@ import VintagePage from './components/VintagePage';
 import HomePage from './components/HomePage';
 import AudioPlayer from './components/AudioPlayer';
 import ScrollToTop from './components/ScrollToTop';
+import FavoritesPage from './components/FavoritesPage';
+import { allItems } from './data'; 
 
 function App() {
   // НОВОЕ: Состояние текущей страницы (по умолчанию 'Home')
@@ -122,7 +124,11 @@ function App() {
   return (
     <div className="container">
       {/* Передаем текущую страницу и функцию переключения в шапку */}
-      <Header currentPage={currentPage} onNavigate={handleNavigate} />
+            <Header 
+        currentPage={currentPage} 
+        onNavigate={handleNavigate} 
+        favoritesCount={favorites.length} 
+      />
 
       <main className="content">
         {renderContent()}

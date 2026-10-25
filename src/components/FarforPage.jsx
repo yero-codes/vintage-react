@@ -1,19 +1,11 @@
 import { useState } from 'react';
 import GalleryCard from './GalleryCard';
+import { allItems } from '../data'; // Импортируем данные
 
 function FarforPage({ favorites, onToggleFavorite }) {
-  // Данные для фарфора (можно добавить новые)
-  const farforData = [
-    { id: 101, img: 'teapair.jpg', title: 'Чайная пара' },
-    { id: 102, img: 'uzbeshka.jpg', title: 'Узбечка с чайником' },
-    { id: 103, img: 'dog.jpg', title: 'Сеттер' },
-    { id: 104, img: 'hozyajka.jpg', title: 'Хозяйка медной горы' },
-    { id: 105, img: 'yakut.jpg', title: 'Якут с собакой' },
-    { id: 106, img: 'beer.jpg', title: 'Олимпиада 1980' } ,
-    { id: 107, img: 'cameo.jpg', title: 'Чайная пара "Cameo"' },
-    { id: 108, img: 'lady.jpg', title: 'Леди в шляпке' } ,
-    { id: 109, img: 'snowman.jpg', title: 'Снеговик' }
-  ]
+  
+  // Фильтруем только фарфор
+  const farforData = allItems.filter(item => item.category === 'farfor');
 
 
   const [selectedFarfor, setSelectedFarfor] = useState(null);

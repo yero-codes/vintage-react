@@ -1,19 +1,11 @@
 import { useState } from 'react';
 import GalleryCard from './GalleryCard';
+import { allItems } from '../data'; // Импортируем данные
 
 function MoneyPage({ favorites, onToggleFavorite }) {
-  // Данные для монет (можно добавить новые)
-  const moneyData = [
-    { id: 201, img: 'money1.jpg', title: 'Банкноты' },
-    { id: 202, img: 'money2.jpg', title: 'Монеты разные' },
-    { id: 203, img: 'money3.jpg', title: 'Монеты юбилейные' },
-    { id: 204, img: 'money4.jpg', title: 'Президенты США' },
-    { id: 205, img: 'money5.jpg', title: 'Коллекция монет' },
-    { id: 206, img: 'money6.jpg', title: 'Коллекция монет' } ,
-    { id: 207, img: 'money7.jpg', title: 'Fauna del Caribe I' },
-    { id: 208, img: 'money8.jpg', title: 'Fauna del Caribe II' } 
-  ];
-
+  
+// Фильтруем только монеты
+  const moneyData = allItems.filter(item => item.category === 'money');
   const [selectedMoney, setSelectedMoney] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 

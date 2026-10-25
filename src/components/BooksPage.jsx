@@ -1,16 +1,12 @@
 import { useState } from 'react';
 import GalleryCard from './GalleryCard';
+import { allItems } from '../data'; // Импортируем данные
+
 
 function BooksPage({ favorites, onToggleFavorite }) {
-  // Данные для книг (можете добавить свои)
-  const booksData = [
-    { id: 1, img: 'book1.jpg', title: 'Повести и рассказы' },
-    { id: 2, img: 'book2.jpg', title: 'Танкист' },
-    { id: 3, img: 'book3.jpg', title: 'Стихи' },
-    { id: 4, img: 'book4.jpg', title: 'И.А. Бунин. Стихотворения и переводы' },
-    { id: 5, img: 'book5.jpg', title: 'Марина Цветаева. Стихи. Проза' },
-    { id: 6, img: 'book6.jpg', title: 'Г.Ф. Шумахер. Паутина жизни' }
-  ];
+
+  // Фильтруем только книги
+  const booksData = allItems.filter(item => item.category === 'books');
 
   const [selectedBook, setSelectedBook] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);

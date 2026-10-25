@@ -1,4 +1,4 @@
-function Header({ currentPage, onNavigate }) {
+function Header({ currentPage, onNavigate, favoritesCount }) {
   // Создаем массив пунктов меню для удобства
   const menuItems = [
     { id: 'home', label: 'Главная' },
@@ -6,6 +6,7 @@ function Header({ currentPage, onNavigate }) {
     { id: 'farfor', label: 'Фарфор CCCP' },
     { id: 'money', label: 'Монеты' },
     { id: 'vintagethings', label: 'Винтажные вещи' },
+    { id: 'favorites', label: 'Избранное' },
     { id: 'news', label: 'Новости' },
     { id: 'contacts', label: 'Контакты' },
   ];
@@ -13,6 +14,12 @@ function Header({ currentPage, onNavigate }) {
   return (
     <aside className="sidebar">
       <h1 className="logo">Винтажные чудеса</h1>
+
+      {/* Бейджик с избранным */}
+      <div style={{ color: '#f5efe6', marginBottom: '20px', fontSize: '18px' }}>
+        Избранное: {favoritesCount}
+      </div>
+
       <nav className="menu" aria-label="Основное меню">
         {menuItems.map((item) => (
           <button

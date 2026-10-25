@@ -1,17 +1,11 @@
 import { useState } from 'react';
 import GalleryCard from './GalleryCard';
+import { allItems } from '../data'; // Импортируем данные
 
 function VintagePage({ favorites, onToggleFavorite }) {
-  const vintageData = [
-    { id: 301, img: 'grafin.jpg', title: 'Графин "Дама" с бокалами' },
-    { id: 302, img: 'neznakomka.jpg', title: 'Картина "Незнакомка"' },
-    { id: 303, img: 'pugovizy.jpg', title: 'Коллекция пуговиц' },
-    { id: 304, img: 'eastereggs.jpg', title: 'Пасхальные яйца' },
-    { id: 305, img: 'lenin.jpg', title: 'В.И.Ленин' },
-    { id: 306, img: 'sigaretnica.jpg', title: 'Сигаретница СССР' },
-    { id: 307, img: 'podstakannik.jpg', title: 'Подстаканник серебряный' },
-    { id: 308, img: 'goodnight.jpg', title: 'Спокойной ночи (чеканка)' }
-  ];
+ 
+  // Фильтруем только винтажные вещи
+  const vintageData = allItems.filter(item => item.category === 'vintagethings');
 
   const [selectedVintage, setSelectedVintage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
