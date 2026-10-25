@@ -1,13 +1,14 @@
 import GalleryCard from './GalleryCard';
+import { allItems } from '../data';
 
-function FavoritesPage({ favorites, onToggleFavorite, allItems }) {
+function FavoritesPage({ favorites, onToggleFavorite }) {
   // Фильтруем только те товары, которые есть в избранном
   const favoriteItems = allItems.filter(item => favorites.includes(item.id));
 
   return (
     <div>
       <header>
-        <h2>❤️ Избранное</h2>
+        <h2>Избранное</h2>
       </header>
 
       {favoriteItems.length === 0 ? (

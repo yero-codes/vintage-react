@@ -110,14 +110,17 @@ function App() {
       );
     }
 
-    // Заглушки для остальных страниц
+    // ВСЕ СТРАНИЦЫ
     if (currentPage === 'books') return <BooksPage favorites={favorites} onToggleFavorite={toggleFavorite} />;
     if (currentPage === 'farfor') return <FarforPage favorites={favorites} onToggleFavorite={toggleFavorite} />;
     if (currentPage === 'money') return <MoneyPage favorites={favorites} onToggleFavorite={toggleFavorite} />;
     if (currentPage === 'vintagethings') return <VintagePage favorites={favorites} onToggleFavorite={toggleFavorite} />;
     if (currentPage === 'contacts') return <ContactForm />;
+
+    // ИЗБРАННОЕ
+    if (currentPage === 'favorites') return <FavoritesPage favorites={favorites} onToggleFavorite={toggleFavorite} />;
     
-    // Главная страница
+    // ГЛАВНАЯ СТРАНИЦА
       return <HomePage />;
   };
 
