@@ -29,6 +29,11 @@ function App() {
     return saved ? JSON.parse(saved) : [];
   });
 
+    // Состояние для темы (по умолчанию 'light')
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('theme') || 'light';
+  });
+
   useEffect(() => {
     setIsLoading(true); // Начинаем загрузку
 
@@ -42,8 +47,18 @@ function App() {
 
       .catch((error) => console.error('Ошибка:', error))
       .finally(() => setIsLoading(false)); 
-    
   }, []);
+
+    // Эффект для применения темы
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  }, [theme]); // <--- Здесь зависимость от theme
+
+  
 
   const filteredNews = newsData.filter((post) => {
     const term = searchTerm.toLowerCase();
@@ -81,6 +96,13 @@ function App() {
   // НОВОЕ: Функция для переключения страниц
   const handleNavigate = (pageId) => {
     setCurrentPage(pageId);
+  };
+
+  // Функция переключения темной и светлой тем
+    const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
   };
 
   // НОВОЕ: Рендерим контент в зависимости от текущей страницы
@@ -147,6 +169,8 @@ function App() {
         currentPage={currentPage} 
         onNavigate={handleNavigate} 
         favoritesCount={favorites.length} 
+        theme={theme} 
+        toggleTheme={toggleTheme} 
       />
 
       <main className="content">

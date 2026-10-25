@@ -296,3 +296,35 @@ body {
   50% { background-color: #f0f0f0; }
   100% { background-color: #e0e0e0; }
 }
+
+/* ===== Тёмная тема ===== */
+body.dark-mode {
+  background-color: #1a1a1a;
+  color: #f5efe6;
+}
+
+body.dark-mode .sidebar {
+  background-color: #0d0d0d;
+}
+
+body.dark-mode .card {
+  background-color: #2a2a2a;
+  color: #f5efe6;
+}
+
+body.dark-mode .content h2 {
+  color: #d97706;
+}
+
+body.dark-mode .modal-content {
+  background-color: #2a2a2a;
+  color: #f5efe6;
+}
+
+body.dark-mode .skeleton-card,
+body.dark-mode .skeleton-image,
+body.dark-mode .skeleton-date,
+body.dark-mode .skeleton-title,
+body.dark-mode .skeleton-text {
+  background-color: #333;
+}
