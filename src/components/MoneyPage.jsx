@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import GalleryCard from './GalleryCard';
 
-function MoneyPage() {
+function MoneyPage({ favorites, onToggleFavorite }) {
   // Данные для монет (можно добавить новые)
   const moneyData = [
-    { id: 1, img: 'money1.jpg', title: 'Банкноты' },
-    { id: 2, img: 'money2.jpg', title: 'Монеты разные' },
-    { id: 3, img: 'money3.jpg', title: 'Монеты юбилейные' },
-    { id: 4, img: 'money4.jpg', title: 'Президенты США' },
-    { id: 5, img: 'money5.jpg', title: 'Коллекция монет' },
-    { id: 6, img: 'money6.jpg', title: 'Коллекция монет' } ,
-    { id: 7, img: 'money7.jpg', title: 'Fauna del Caribe I' },
-    { id: 8, img: 'money8.jpg', title: 'Fauna del Caribe II' } 
+    { id: 201, img: 'money1.jpg', title: 'Банкноты' },
+    { id: 202, img: 'money2.jpg', title: 'Монеты разные' },
+    { id: 203, img: 'money3.jpg', title: 'Монеты юбилейные' },
+    { id: 204, img: 'money4.jpg', title: 'Президенты США' },
+    { id: 205, img: 'money5.jpg', title: 'Коллекция монет' },
+    { id: 206, img: 'money6.jpg', title: 'Коллекция монет' } ,
+    { id: 207, img: 'money7.jpg', title: 'Fauna del Caribe I' },
+    { id: 208, img: 'money8.jpg', title: 'Fauna del Caribe II' } 
   ];
 
   const [selectedMoney, setSelectedMoney] = useState(null);
@@ -37,8 +37,11 @@ function MoneyPage() {
         {moneyData.map((money) => (
           <GalleryCard 
             key={money.id} 
+            id={money.id} // <--- добавили id
             img={money.img} 
             title={money.title} 
+            isFavorite={favorites.includes(money.id)} // <--- проверяем
+            onToggleFavorite={onToggleFavorite} // <--- передаем функцию
             onClick={() => handleCardClick(money)}
           />
         ))}

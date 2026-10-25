@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import GalleryCard from './GalleryCard';
 
-function BooksPage() {
+function BooksPage({ favorites, onToggleFavorite }) {
   // Данные для книг (можете добавить свои)
   const booksData = [
     { id: 1, img: 'book1.jpg', title: 'Повести и рассказы' },
@@ -35,8 +35,11 @@ function BooksPage() {
         {booksData.map((book) => (
           <GalleryCard 
             key={book.id} 
+            id={book.id} // <--- добавили id
             img={book.img} 
             title={book.title} 
+            isFavorite={favorites.includes(book.id)} // <--- проверяем
+            onToggleFavorite={onToggleFavorite} // <--- передаем функцию
             onClick={() => handleCardClick(book)}
           />
         ))}

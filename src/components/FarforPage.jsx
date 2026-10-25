@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import GalleryCard from './GalleryCard';
 
-function FarforPage() {
+function FarforPage({ favorites, onToggleFavorite }) {
   // Данные для фарфора (можно добавить новые)
   const farforData = [
-    { id: 1, img: 'teapair.jpg', title: 'Чайная пара' },
-    { id: 2, img: 'uzbeshka.jpg', title: 'Узбечка с чайником' },
-    { id: 3, img: 'dog.jpg', title: 'Сеттер' },
-    { id: 4, img: 'hozyajka.jpg', title: 'Хозяйка медной горы' },
-    { id: 5, img: 'yakut.jpg', title: 'Якут с собакой' },
-    { id: 6, img: 'beer.jpg', title: 'Олимпиада 1980' } ,
-    { id: 7, img: 'cameo.jpg', title: 'Чайная пара "Cameo"' },
-    { id: 8, img: 'lady.jpg', title: 'Леди в шляпке' } ,
-    { id: 9, img: 'snowman.jpg', title: 'Снеговик' }
+    { id: 101, img: 'teapair.jpg', title: 'Чайная пара' },
+    { id: 102, img: 'uzbeshka.jpg', title: 'Узбечка с чайником' },
+    { id: 103, img: 'dog.jpg', title: 'Сеттер' },
+    { id: 104, img: 'hozyajka.jpg', title: 'Хозяйка медной горы' },
+    { id: 105, img: 'yakut.jpg', title: 'Якут с собакой' },
+    { id: 106, img: 'beer.jpg', title: 'Олимпиада 1980' } ,
+    { id: 107, img: 'cameo.jpg', title: 'Чайная пара "Cameo"' },
+    { id: 108, img: 'lady.jpg', title: 'Леди в шляпке' } ,
+    { id: 109, img: 'snowman.jpg', title: 'Снеговик' }
   ]
 
 
@@ -39,8 +39,11 @@ function FarforPage() {
         {farforData.map((farfor) => (
           <GalleryCard 
             key={farfor.id} 
+            id={farfor.id} // <--- добавили id
             img={farfor.img} 
             title={farfor.title} 
+            isFavorite={favorites.includes(farfor.id)} // <--- проверяем
+            onToggleFavorite={onToggleFavorite} // <--- передаем функцию
             onClick={() => handleCardClick(farfor)}
           />
         ))}

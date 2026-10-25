@@ -11,13 +11,20 @@ import AudioPlayer from './components/AudioPlayer';
 import ScrollToTop from './components/ScrollToTop';
 
 function App() {
-  // НОВОЕ: Состояние текущей страницы (по умолчанию 'news')
+  // НОВОЕ: Состояние текущей страницы (по умолчанию 'Home')
   const [currentPage, setCurrentPage] = useState('home');
   
   const [newsData, setNewsData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedNews, setSelectedNews] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // Состояние для избранного
+  const [favorites, setFavorites] = useState(() => {
+    // Читаем из localStorage при первой загрузке
+    const saved = localStorage.getItem('favorites');
+    return saved ? JSON.parse(saved) : [];
+  });
 
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}data.json`)
@@ -45,6 +52,21 @@ function App() {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedNews(null);
+  };
+
+    // Функция добавления/удаления из избранного
+  const toggleFavorite = (id) => {
+    setFavorites((prev) => {
+      let newFavorites;
+      if (prev.includes(id)) {
+        newFavorites = prev.filter((favId) => favId !== id);
+      } else {
+        newFavorites = [...prev, id];
+      }
+      // Сохраняем в localStorage
+      localStorage.setItem('favorites', JSON.stringify(newFavorites));
+      return newFavorites;
+    });
   };
 
   // НОВОЕ: Функция для переключения страниц
@@ -87,10 +109,10 @@ function App() {
     }
 
     // Заглушки для остальных страниц
-    if (currentPage === 'books') return <BooksPage />;
-    if (currentPage === 'farfor') return <FarforPage />;
-    if (currentPage === 'money') return <MoneyPage />;
-    if (currentPage === 'vintagethings') return <VintagePage />;
+    if (currentPage === 'books') return <BooksPage favorites={favorites} onToggleFavorite={toggleFavorite} />;
+    if (currentPage === 'farfor') return <FarforPage favorites={favorites} onToggleFavorite={toggleFavorite} />;
+    if (currentPage === 'money') return <MoneyPage favorites={favorites} onToggleFavorite={toggleFavorite} />;
+    if (currentPage === 'vintagethings') return <VintagePage favorites={favorites} onToggleFavorite={toggleFavorite} />;
     if (currentPage === 'contacts') return <ContactForm />;
     
     // Главная страница

@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import GalleryCard from './GalleryCard';
 
-function VintagePage() {
+function VintagePage({ favorites, onToggleFavorite }) {
   const vintageData = [
-    { id: 1, img: 'grafin.jpg', title: 'Графин "Дама" с бокалами' },
-    { id: 2, img: 'neznakomka.jpg', title: 'Картина "Незнакомка"' },
-    { id: 3, img: 'pugovizy.jpg', title: 'Коллекция пуговиц' },
-    { id: 4, img: 'eastereggs.jpg', title: 'Пасхальные яйца' },
-    { id: 5, img: 'lenin.jpg', title: 'В.И.Ленин' },
-    { id: 6, img: 'sigaretnica.jpg', title: 'Сигаретница СССР' },
-    { id: 7, img: 'podstakannik.jpg', title: 'Подстаканник серебряный' },
-    { id: 8, img: 'goodnight.jpg', title: 'Спокойной ночи (чеканка)' }
+    { id: 301, img: 'grafin.jpg', title: 'Графин "Дама" с бокалами' },
+    { id: 302, img: 'neznakomka.jpg', title: 'Картина "Незнакомка"' },
+    { id: 303, img: 'pugovizy.jpg', title: 'Коллекция пуговиц' },
+    { id: 304, img: 'eastereggs.jpg', title: 'Пасхальные яйца' },
+    { id: 305, img: 'lenin.jpg', title: 'В.И.Ленин' },
+    { id: 306, img: 'sigaretnica.jpg', title: 'Сигаретница СССР' },
+    { id: 307, img: 'podstakannik.jpg', title: 'Подстаканник серебряный' },
+    { id: 308, img: 'goodnight.jpg', title: 'Спокойной ночи (чеканка)' }
   ];
 
   const [selectedVintage, setSelectedVintage] = useState(null);
@@ -36,8 +36,11 @@ function VintagePage() {
         {vintageData.map((item) => (
           <GalleryCard 
             key={item.id} 
+            id={item.id} // <--- добавили id
             img={item.img} 
             title={item.title} 
+            isFavorite={favorites.includes(item.id)} // <--- проверяем
+            onToggleFavorite={onToggleFavorite} // <--- передаем функцию
             onClick={() => handleCardClick(item)}
           />
         ))}
