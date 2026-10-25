@@ -8,6 +8,7 @@ import MoneyPage from './components/MoneyPage';
 import VintagePage from './components/VintagePage';
 import HomePage from './components/HomePage';
 import AudioPlayer from './components/AudioPlayer';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   // НОВОЕ: Состояние текущей страницы (по умолчанию 'news')
@@ -115,6 +116,7 @@ function App() {
         </div>
       )}
       <AudioPlayer />
+      <ScrollToTop />
     </div>
   );
 }
