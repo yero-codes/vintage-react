@@ -10,7 +10,7 @@ import HomePage from './components/HomePage';
 import AudioPlayer from './components/AudioPlayer';
 import ScrollToTop from './components/ScrollToTop';
 import FavoritesPage from './components/FavoritesPage';
-import { allItems } from './data'; 
+import NewsSkeleton from './components/NewsSkeleton';
 
 function App() {
   // НОВОЕ: Состояние текущей страницы (по умолчанию 'Home')
@@ -20,6 +20,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedNews, setSelectedNews] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
     // Состояние для избранного
   const [favorites, setFavorites] = useState(() => {
@@ -29,13 +30,19 @@ function App() {
   });
 
   useEffect(() => {
+    setIsLoading(true); // Начинаем загрузку
+
     fetch(`${import.meta.env.BASE_URL}data.json`)
       .then((response) => response.json())
       .then((data) => {
+
         data.sort((a, b) => new Date(b.date) - new Date(a.date));
         setNewsData(data);
       })
-      .catch((error) => console.error('Ошибка:', error));
+
+      .catch((error) => console.error('Ошибка:', error))
+      .finally(() => setIsLoading(false)); 
+    
   }, []);
 
   const filteredNews = newsData.filter((post) => {
@@ -92,7 +99,16 @@ function App() {
             style={{ padding: '10px', width: '300px', margin: '20px 0', borderRadius: '5px', border: '1px solid #ccc' }}
           />
           <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-            {filteredNews.length === 0 ? (
+
+            {isLoading ? (
+              // 1. Показываем скелетоны, если идет загрузка
+              <>
+                <NewsSkeleton />
+                <NewsSkeleton />
+                <NewsSkeleton />
+              </>
+
+            ) : filteredNews.length === 0 ? (
               <p>Ничего не найдено.</p>
             ) : (
               filteredNews.map((post) => (

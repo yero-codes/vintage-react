@@ -245,3 +245,54 @@ body {
   background-color: #d97706;
   transform: translateY(-3px);
 }
+
+/* ===== Скелетоны (Skeleton Loaders) ===== */
+.skeleton-card {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skeleton-image,
+.skeleton-date,
+.skeleton-title,
+.skeleton-text {
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  animation: pulse-bg 1.5s ease-in-out infinite;
+}
+
+.skeleton-image {
+  height: 150px;
+  width: 100%;
+}
+
+.skeleton-date {
+  height: 12px;
+  width: 40%;
+}
+
+.skeleton-title {
+  height: 20px;
+  width: 80%;
+}
+
+.skeleton-text {
+  height: 14px;
+  width: 100%;
+}
+
+.skeleton-text.short {
+  width: 60%;
+}
+
+@keyframes pulse-bg {
+  0% { background-color: #e0e0e0; }
+  50% { background-color: #f0f0f0; }
+  100% { background-color: #e0e0e0; }
+}
