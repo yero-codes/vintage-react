@@ -1,3 +1,5 @@
+import WeatherWidget from './WeatherWidget';
+
 function HomePage() {
   const bannerImages = ['beerussr.jpg', 'kartina.jpg', 'kukla.jpg', 'patefon.jpg'];
 
@@ -32,6 +34,7 @@ function HomePage() {
         <p>
           Используйте меню слева, чтобы перейти в интересующий вас раздел.
         </p>
+         <WeatherWidget />
       </div>
     </div>
   );
