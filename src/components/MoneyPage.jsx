@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import GalleryCard from './GalleryCard';
 import { allItems } from '../data'; // Импортируем данные
+import CurrencyRates from './CurrencyRates';
 
 function MoneyPage({ favorites, onToggleFavorite }) {
   
@@ -24,6 +25,9 @@ function MoneyPage({ favorites, onToggleFavorite }) {
       <header>
         <h2>Монеты и банкноты</h2>
       </header>
+
+      {/* Виджет курса валют */}
+      <CurrencyRates />
       
       <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
         {moneyData.map((money) => (

@@ -355,6 +355,19 @@ body.dark-mode .weather-widget input::placeholder {
   color: #aaa;
 }
 
+body.dark-mode .currency-widget {
+  background-color: #2a2a2a !important;
+  color: #f5efe6;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .currency-widget h3,
+body.dark-mode .currency-widget p,
+body.dark-mode .currency-widget span,
+body.dark-mode .currency-widget strong {
+  color: #f5efe6;
+}
+
 /* ===== Анимация появления карточек ===== */
 @keyframes fadeInUp {
   from {
