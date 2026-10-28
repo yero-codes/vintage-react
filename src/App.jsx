@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import NewsCard from './components/NewsCard';
 import ContactForm from './components/ContactForm';
 import BooksPage from './components/BooksPage';
 import FarforPage from './components/FarforPage';
@@ -10,76 +10,27 @@ import HomePage from './components/HomePage';
 import AudioPlayer from './components/AudioPlayer';
 import ScrollToTop from './components/ScrollToTop';
 import FavoritesPage from './components/FavoritesPage';
-import NewsSkeleton from './components/NewsSkeleton';
+import NewsPage from './components/NewsPage';
+import NotFoundPage from './components/NotFoundPage';
 
 function App() {
-  // НОВОЕ: Состояние текущей страницы (по умолчанию 'Home')
-  const [currentPage, setCurrentPage] = useState('home');
-  
-  const [newsData, setNewsData] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedNews, setSelectedNews] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [visibleCount, setVisibleCount] = useState(2);  // кнопка показать еще
-
-    // Состояние для избранного
   const [favorites, setFavorites] = useState(() => {
-    // Читаем из localStorage при первой загрузке
     const saved = localStorage.getItem('favorites');
     return saved ? JSON.parse(saved) : [];
   });
 
-    // Состояние для темы (по умолчанию 'light')
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme') || 'light';
   });
 
-  useEffect(() => {
-    setIsLoading(true); // Начинаем загрузку
-
-    fetch(`${import.meta.env.BASE_URL}data.json`)
-      .then((response) => response.json())
-      .then((data) => {
-
-        data.sort((a, b) => new Date(b.date) - new Date(a.date));
-        setNewsData(data);
-      })
-
-      .catch((error) => console.error('Ошибка:', error))
-      .finally(() => setIsLoading(false)); 
-  }, []);
-
-    // Эффект для применения темы
   useEffect(() => {
     if (theme === 'dark') {
       document.body.classList.add('dark-mode');
     } else {
       document.body.classList.remove('dark-mode');
     }
-  }, [theme]); // <--- Здесь зависимость от theme
+  }, [theme]);
 
-  
-
-  const filteredNews = newsData.filter((post) => {
-    const term = searchTerm.toLowerCase();
-    return (
-      post.title.toLowerCase().includes(term) ||
-      post.body.toLowerCase().includes(term)
-    );
-  });
-
-  const handleCardClick = (newsItem) => {
-    setSelectedNews(newsItem);
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedNews(null);
-  };
-
-    // Функция добавления/удаления из избранного
   const toggleFavorite = (id) => {
     setFavorites((prev) => {
       let newFavorites;
@@ -88,130 +39,39 @@ function App() {
       } else {
         newFavorites = [...prev, id];
       }
-      // Сохраняем в localStorage
       localStorage.setItem('favorites', JSON.stringify(newFavorites));
       return newFavorites;
     });
   };
 
-  // НОВОЕ: Функция для переключения страниц
-  const handleNavigate = (pageId) => {
-    setCurrentPage(pageId);
-  };
-
-  // Функция переключения темной и светлой тем
-    const toggleTheme = () => {
+  const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
   };
 
-  // НОВОЕ: Рендерим контент в зависимости от текущей страницы
-    const renderContent = () => {
-    if (currentPage === 'news') {
-      return (
-        <>
-          <header>
-            <h2>Новости и статьи</h2>
-          </header>
-          <input 
-            type="text" 
-            placeholder="Поиск по новостям..." 
-            value={searchTerm} 
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-              setVisibleCount(4); // Сбрасываем пагинацию при поиске
-            }}
-            style={{ padding: '10px', width: '300px', margin: '20px 0', borderRadius: '5px', border: '1px solid #ccc' }}
-          />
-          <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-            {isLoading ? (
-              // 1. Показываем скелетоны, если идет загрузка
-              <>
-                <NewsSkeleton />
-                <NewsSkeleton />
-                <NewsSkeleton />
-              </>
-            ) : filteredNews.length === 0 ? (
-              // 2. Если загрузка прошла, но ничего не найдено
-              <p>Ничего не найдено.</p>
-            ) : (
-              // 3. Показываем карточки и кнопку "Показать ещё"
-              <>
-                {filteredNews.slice(0, visibleCount).map((post) => (
-                  <NewsCard 
-                    key={post.id} 
-                    title={post.title} 
-                    body={post.body.slice(0, 60) + '...'}
-                    date={new Date(post.date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })} 
-                    onClick={() => handleCardClick(post)}
-                  />
-                ))}
-                
-                {/* Кнопка «Показать ещё» */}
-                {visibleCount < filteredNews.length && (
-                  <div style={{ width: '100%', textAlign: 'center', marginTop: '20px' }}>
-                    <button 
-                      onClick={() => setVisibleCount(prev => prev + 4)}
-                      style={{ 
-                        padding: '10px 20px', 
-                        backgroundColor: '#b8651b', 
-                        color: 'white', 
-                        border: 'none', 
-                        borderRadius: '5px', 
-                        cursor: 'pointer',
-                        fontSize: '16px'
-                      }}
-                    >
-                      Показать ещё
-                    </button>
-                  </div>
-                )}
-              </>
-            )}
-          </div>
-        </>
-      );
-    }
-
-    // ВСЕ СТРАНИЦЫ
-    if (currentPage === 'books') return <BooksPage favorites={favorites} onToggleFavorite={toggleFavorite} />;
-    if (currentPage === 'farfor') return <FarforPage favorites={favorites} onToggleFavorite={toggleFavorite} />;
-    if (currentPage === 'money') return <MoneyPage favorites={favorites} onToggleFavorite={toggleFavorite} />;
-    if (currentPage === 'vintagethings') return <VintagePage favorites={favorites} onToggleFavorite={toggleFavorite} />;
-    if (currentPage === 'contacts') return <ContactForm />;
-
-    // ИЗБРАННОЕ
-    if (currentPage === 'favorites') return <FavoritesPage favorites={favorites} onToggleFavorite={toggleFavorite} />;
-    
-    // ГЛАВНАЯ СТРАНИЦА
-      return <HomePage />;
-  };
-
   return (
     <div className="container">
-      {/* Передаем текущую страницу и функцию переключения в шапку */}
-            <Header 
-        currentPage={currentPage} 
-        onNavigate={handleNavigate} 
+      <Header 
         favoritesCount={favorites.length} 
         theme={theme} 
         toggleTheme={toggleTheme} 
       />
 
       <main className="content">
-        {renderContent()}
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/news" element={<NewsPage />} />
+          <Route path="/books" element={<BooksPage favorites={favorites} onToggleFavorite={toggleFavorite} />} />
+          <Route path="/farfor" element={<FarforPage favorites={favorites} onToggleFavorite={toggleFavorite} />} />
+          <Route path="/money" element={<MoneyPage favorites={favorites} onToggleFavorite={toggleFavorite} />} />
+          <Route path="/vintagethings" element={<VintagePage favorites={favorites} onToggleFavorite={toggleFavorite} />} />
+          <Route path="/favorites" element={<FavoritesPage favorites={favorites} onToggleFavorite={toggleFavorite} />} />
+          <Route path="/contacts" element={<ContactForm />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </main>
 
-      {isModalOpen && selectedNews && (
-        <div className="modal-overlay" onClick={handleCloseModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h2>{selectedNews.title}</h2>
-            <p>{selectedNews.body}</p>
-            <button onClick={handleCloseModal}>Закрыть</button>
-          </div>
-        </div>
-      )}
       <AudioPlayer />
       <ScrollToTop />
     </div>
