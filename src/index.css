@@ -330,6 +330,31 @@ body.dark-mode .skeleton-text {
   background-color: #333;
 }
 
+/* ===== Исправление виджетов в темной теме ===== */
+body.dark-mode .weather-widget,
+body.dark-mode .currency-widget {
+  background-color: #2a2a2a; /* Темный фон */
+  color: #f5efe6; /* Светлый текст */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .weather-widget h3,
+body.dark-mode .weather-widget h4,
+body.dark-mode .currency-widget h3,
+body.dark-mode .currency-widget p {
+  color: #f5efe6; /* Светлый текст для заголовков и параграфов */
+}
+
+body.dark-mode .weather-widget input {
+  background-color: #333;
+  color: #f5efe6;
+  border-color: #555;
+}
+
+body.dark-mode .weather-widget input::placeholder {
+  color: #aaa;
+}
+
 /* ===== Анимация появления карточек ===== */
 @keyframes fadeInUp {
   from {

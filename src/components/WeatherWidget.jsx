@@ -16,7 +16,7 @@ function WeatherWidget() {
   };
 
   return (
-    <div style={{ padding: '20px', backgroundColor: '#fff', borderRadius: '8px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', maxWidth: '400px' }}>
+    <div className="weather-widget" style={{ padding: '20px', backgroundColor: '#fff', borderRadius: '8px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', maxWidth: '400px' }}>
       <h3>Погода</h3>
       
       <form onSubmit={handleSearch} style={{ display: 'flex', gap: '10px', marginBottom: '15px' }}>
@@ -27,6 +27,8 @@ function WeatherWidget() {
           placeholder="Город"
           style={{ flex: 1, padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
         />
+
+     
         <button type="submit" style={{ padding: '8px 16px', backgroundColor: '#b8651b', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
           Найти
         </button>
