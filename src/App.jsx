@@ -21,6 +21,7 @@ function App() {
   const [selectedNews, setSelectedNews] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [visibleCount, setVisibleCount] = useState(2);  // кнопка показать еще
 
     // Состояние для избранного
   const [favorites, setFavorites] = useState(() => {
@@ -106,7 +107,7 @@ function App() {
   };
 
   // НОВОЕ: Рендерим контент в зависимости от текущей страницы
-  const renderContent = () => {
+    const renderContent = () => {
     if (currentPage === 'news') {
       return (
         <>
@@ -117,11 +118,13 @@ function App() {
             type="text" 
             placeholder="Поиск по новостям..." 
             value={searchTerm} 
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setVisibleCount(4); // Сбрасываем пагинацию при поиске
+            }}
             style={{ padding: '10px', width: '300px', margin: '20px 0', borderRadius: '5px', border: '1px solid #ccc' }}
           />
           <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-
             {isLoading ? (
               // 1. Показываем скелетоны, если идет загрузка
               <>
@@ -129,19 +132,42 @@ function App() {
                 <NewsSkeleton />
                 <NewsSkeleton />
               </>
-
             ) : filteredNews.length === 0 ? (
+              // 2. Если загрузка прошла, но ничего не найдено
               <p>Ничего не найдено.</p>
             ) : (
-              filteredNews.map((post) => (
-                <NewsCard 
-                  key={post.id} 
-                  title={post.title} 
-                  body={post.body.slice(0, 60) + '...'}
-                  date={new Date(post.date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })} 
-                  onClick={() => handleCardClick(post)}
-                />
-              ))
+              // 3. Показываем карточки и кнопку "Показать ещё"
+              <>
+                {filteredNews.slice(0, visibleCount).map((post) => (
+                  <NewsCard 
+                    key={post.id} 
+                    title={post.title} 
+                    body={post.body.slice(0, 60) + '...'}
+                    date={new Date(post.date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })} 
+                    onClick={() => handleCardClick(post)}
+                  />
+                ))}
+                
+                {/* Кнопка «Показать ещё» */}
+                {visibleCount < filteredNews.length && (
+                  <div style={{ width: '100%', textAlign: 'center', marginTop: '20px' }}>
+                    <button 
+                      onClick={() => setVisibleCount(prev => prev + 4)}
+                      style={{ 
+                        padding: '10px 20px', 
+                        backgroundColor: '#b8651b', 
+                        color: 'white', 
+                        border: 'none', 
+                        borderRadius: '5px', 
+                        cursor: 'pointer',
+                        fontSize: '16px'
+                      }}
+                    >
+                      Показать ещё
+                    </button>
+                  </div>
+                )}
+              </>
             )}
           </div>
         </>
