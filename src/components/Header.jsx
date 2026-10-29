@@ -15,6 +15,7 @@ function Header() {
     { to: '/vintagethings', label: 'Винтажные вещи' },
     { to: '/favorites', label: 'Избранное' },
     { to: '/news', label: 'Новости' },
+    { to: '/articles', label: 'Статьи' },
     { to: '/contacts', label: 'Контакты' },
   ];
 

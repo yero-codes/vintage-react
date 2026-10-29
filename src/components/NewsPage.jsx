@@ -10,13 +10,17 @@ function NewsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [visibleCount, setVisibleCount] = useState(4);
 
-  useEffect(() => {
+   useEffect(() => {
     setIsLoading(true);
-    fetch(`${import.meta.env.BASE_URL}data.json`)
+    fetch('https://jsonplaceholder.typicode.com/posts')
       .then((response) => response.json())
       .then((data) => {
-        data.sort((a, b) => new Date(b.date) - new Date(a.date));
-        setNewsData(data);
+        const formattedData = data.map((post) => ({
+          ...post,
+          date: new Date(2026, 0, post.id).toISOString(),
+        }));
+        formattedData.sort((a, b) => b.id - a.id);
+        setNewsData(formattedData);
       })
       .catch((error) => console.error('Ошибка:', error))
       .finally(() => setIsLoading(false));

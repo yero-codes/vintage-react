@@ -11,6 +11,7 @@ import ScrollToTop from './components/ScrollToTop';
 import FavoritesPage from './components/FavoritesPage';
 import NewsPage from './components/NewsPage';
 import NotFoundPage from './components/NotFoundPage';
+import ArticlesPage from './components/ArticlesPage';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="/contacts" element={<ContactForm />} />
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/articles" element={<ArticlesPage />} />
         </Routes>
       </main>
 
