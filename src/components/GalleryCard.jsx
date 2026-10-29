@@ -1,4 +1,6 @@
-function GalleryCard({ id, img, title, isFavorite, onToggleFavorite, onClick }) {
+import { memo } from 'react';
+
+const GalleryCard = memo(function GalleryCard({ id, img, title, isFavorite, onToggleFavorite, onClick }) {
   return (
     <article className="card" style={{ position: 'relative' }}>
       <figure className="card-figure" onClick={onClick} style={{ cursor: 'pointer' }}>
@@ -8,32 +10,16 @@ function GalleryCard({ id, img, title, isFavorite, onToggleFavorite, onClick }) 
       
       {/* Кнопка-сердечко */}
       <button 
+        className="favorite-btn" // <--- Добавили класс для стилей
         onClick={(e) => {
-          e.stopPropagation(); // Чтобы клик по сердечку не открывал модалку
+          e.stopPropagation();
           onToggleFavorite(id);
-        }}
-        style={{
-          position: 'absolute',
-          top: '10px',
-          right: '10px',
-          background: 'rgba(255, 255, 255, 0.8)',
-          border: 'none',
-          borderRadius: '50%',
-          width: '40px',
-          height: '40px',
-          fontSize: '20px',
-          cursor: 'pointer',
-          zIndex: 10,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
         }}
       >
         {isFavorite ? '❤️' : '🤍'}
       </button>
     </article>
   );
-}
+}); 
 
 export default GalleryCard;
