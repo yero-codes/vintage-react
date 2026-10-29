@@ -2,9 +2,11 @@ import { useState } from 'react';
 import GalleryCard from './GalleryCard';
 import { allItems } from '../data'; // Импортируем данные
 import CurrencyRates from './CurrencyRates';
+import { useFavorites } from '../context/FavoritesContext';
 
-function MoneyPage({ favorites, onToggleFavorite }) {
-  
+function MoneyPage() {
+   const { favorites, toggleFavorite } = useFavorites();
+
 // Фильтруем только монеты
   const moneyData = allItems.filter(item => item.category === 'money');
   const [selectedMoney, setSelectedMoney] = useState(null);
@@ -37,7 +39,7 @@ function MoneyPage({ favorites, onToggleFavorite }) {
             img={money.img} 
             title={money.title} 
             isFavorite={favorites.includes(money.id)} // <--- проверяем
-            onToggleFavorite={onToggleFavorite} // <--- передаем функцию
+            onToggleFavorite={toggleFavorite} // <--- передаем функцию
             onClick={() => handleCardClick(money)}
           />
         ))}

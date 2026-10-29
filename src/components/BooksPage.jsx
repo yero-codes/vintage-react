@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import GalleryCard from './GalleryCard';
 import { allItems } from '../data'; // Импортируем данные
+import { useFavorites } from '../context/FavoritesContext';
 
 
-function BooksPage({ favorites, onToggleFavorite }) {
-
+function BooksPage() {
+  const { favorites, toggleFavorite } = useFavorites();
+  
   // Фильтруем только книги
   const booksData = allItems.filter(item => item.category === 'books');
 
@@ -35,7 +37,7 @@ function BooksPage({ favorites, onToggleFavorite }) {
             img={book.img} 
             title={book.title} 
             isFavorite={favorites.includes(book.id)} // <--- проверяем
-            onToggleFavorite={onToggleFavorite} // <--- передаем функцию
+            onToggleFavorite={toggleFavorite} // <--- передаем функцию
             onClick={() => handleCardClick(book)}
           />
         ))}

@@ -1,7 +1,9 @@
 import GalleryCard from './GalleryCard';
 import { allItems } from '../data';
+import { useFavorites } from '../context/FavoritesContext';
 
-function FavoritesPage({ favorites, onToggleFavorite }) {
+function FavoritesPage() {
+  const { favorites, toggleFavorite } = useFavorites(); 
   // Фильтруем только те товары, которые есть в избранном
   const favoriteItems = allItems.filter(item => favorites.includes(item.id));
 
@@ -22,7 +24,7 @@ function FavoritesPage({ favorites, onToggleFavorite }) {
               img={item.img} 
               title={item.title} 
               isFavorite={true} // Они все избранные
-              onToggleFavorite={onToggleFavorite}
+              onToggleFavorite={toggleFavorite}
               onClick={() => {}} // Пока без модалки, или можно добавить
             />
           ))}

@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import GalleryCard from './GalleryCard';
 import { allItems } from '../data'; // Импортируем данные
+import { useFavorites } from '../context/FavoritesContext'; //
 
-function FarforPage({ favorites, onToggleFavorite }) {
-  
+function FarforPage() {
+  const { favorites, toggleFavorite } = useFavorites();
   // Фильтруем только фарфор
   const farforData = allItems.filter(item => item.category === 'farfor');
 
@@ -35,7 +36,7 @@ function FarforPage({ favorites, onToggleFavorite }) {
             img={farfor.img} 
             title={farfor.title} 
             isFavorite={favorites.includes(farfor.id)} // <--- проверяем
-            onToggleFavorite={onToggleFavorite} // <--- передаем функцию
+            onToggleFavorite={toggleFavorite} // <--- передаем функцию
             onClick={() => handleCardClick(farfor)}
           />
         ))}

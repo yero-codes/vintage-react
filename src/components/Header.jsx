@@ -1,6 +1,12 @@
 import { NavLink } from 'react-router-dom';
+import { useFavorites } from '../context/FavoritesContext';
+import { useTheme } from '../context/ThemeContext';
 
-function Header({ favoritesCount, theme, toggleTheme }) {
+
+function Header() {
+  const { favorites } = useFavorites();
+  const { theme, toggleTheme } = useTheme();
+
   const menuItems = [
     { to: '/', label: 'Главная' },
     { to: '/books', label: 'Книги СССР' },
@@ -24,7 +30,7 @@ function Header({ favoritesCount, theme, toggleTheme }) {
       </button>
 
       <div style={{ color: '#f5efe6', marginBottom: '20px', fontSize: '18px' }}>
-        ❤️ Избранное: {favoritesCount}
+        ❤️ Избранное: {favorites.length}
       </div>
 
       <nav className="menu" aria-label="Основное меню">

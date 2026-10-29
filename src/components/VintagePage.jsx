@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import GalleryCard from './GalleryCard';
 import { allItems } from '../data'; // Импортируем данные
+import { useFavorites } from '../context/FavoritesContext';
 
-function VintagePage({ favorites, onToggleFavorite }) {
+function VintagePage() {
+   const { favorites, toggleFavorite } = useFavorites();
  
   // Фильтруем только винтажные вещи
   const vintageData = allItems.filter(item => item.category === 'vintagethings');
@@ -34,7 +36,7 @@ function VintagePage({ favorites, onToggleFavorite }) {
             img={item.img} 
             title={item.title} 
             isFavorite={favorites.includes(item.id)} // <--- проверяем
-            onToggleFavorite={onToggleFavorite} // <--- передаем функцию
+            onToggleFavorite={toggleFavorite} // <--- передаем функцию
             onClick={() => handleCardClick(item)}
           />
         ))}
