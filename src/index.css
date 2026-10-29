@@ -349,6 +349,35 @@ body.dark-mode .skeleton-text {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+/* ===== Стили для страницы 404 ===== */
+.not-found-container {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+body.dark-mode .not-found-container h1 {
+  color: #d97706;
+}
+
+body.dark-mode .not-found-container h2 {
+  color: #f5efe6;
+}
+
+body.dark-mode .not-found-container p {
+  color: #aaa;
+}
+
+/* ===== анимация надписи 404 ===== */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+.error-number {
+  animation: float 3s ease-in-out infinite;
+  
+}
+
 /* ===== Исправление виджетов в темной теме ===== */
 body.dark-mode .weather-widget,
 body.dark-mode .currency-widget {
