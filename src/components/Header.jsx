@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { useFavorites } from '../context/FavoritesContext';
 import { useTheme } from '../context/ThemeContext';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../context/useCart';
 
 function Header() {
   const { favorites } = useFavorites();

@@ -1,8 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-const CartContext = createContext();
-
-export const useCart = () => useContext(CartContext);
+export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   // Пытаемся взять корзину из localStorage, если ее нет - создаем пустой массив

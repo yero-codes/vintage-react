@@ -55,5 +55,5 @@ const getRandomPrice = (category) => {
 // Экспортируем товары с ценами
 export const allItems = baseItems.map(item => ({
   ...item,
-  price: getRandomPrice(item.category)
+  price: item.price || getRandomPrice(item.category)
 }));
