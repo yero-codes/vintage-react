@@ -1,4 +1,5 @@
-export const allItems = [
+const baseItems = [
+
   // ===== КНИГИ (id 1-6) =====
   { id: 1, category: 'books', img: 'book1.jpg', title: 'Повести и рассказы' },
   { id: 2, category: 'books', img: 'book2.jpg', title: 'Танкист' },
@@ -38,3 +39,21 @@ export const allItems = [
   { id: 307, category: 'vintagethings', img: 'podstakannik.jpg', title: 'Подстаканник серебряный' },
   { id: 308, category: 'vintagethings', img: 'goodnight.jpg', title: 'Спокойной ночи (чеканка)' },
 ];
+
+// Функция для генерации цены
+const getRandomPrice = (category) => {
+  const priceRanges = {
+    'books': [300, 1500],
+    'farfor': [1500, 8000],
+    'money': [500, 5000],
+    'vintagethings': [1000, 15000]
+  };
+  const [min, max] = priceRanges[category] || [500, 3000];
+  return Math.floor((Math.random() * (max - min) + min) / 10) * 10;
+};
+
+// Экспортируем товары с ценами
+export const allItems = baseItems.map(item => ({
+  ...item,
+  price: getRandomPrice(item.category)
+}));

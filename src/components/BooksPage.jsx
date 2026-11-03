@@ -36,6 +36,7 @@ function BooksPage() {
             id={book.id} // <--- добавили id
             img={book.img} 
             title={book.title} 
+            price={book.price}
             isFavorite={favorites.includes(book.id)} // <--- проверяем
             onToggleFavorite={toggleFavorite} // <--- передаем функцию
             onClick={() => handleCardClick(book)}

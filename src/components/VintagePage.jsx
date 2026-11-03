@@ -35,6 +35,7 @@ function VintagePage() {
             id={item.id} // <--- добавили id
             img={item.img} 
             title={item.title} 
+             price={item.price}
             isFavorite={favorites.includes(item.id)} // <--- проверяем
             onToggleFavorite={toggleFavorite} // <--- передаем функцию
             onClick={() => handleCardClick(item)}

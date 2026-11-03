@@ -38,6 +38,7 @@ function MoneyPage() {
             id={money.id} // <--- добавили id
             img={money.img} 
             title={money.title} 
+             price={money.price}
             isFavorite={favorites.includes(money.id)} // <--- проверяем
             onToggleFavorite={toggleFavorite} // <--- передаем функцию
             onClick={() => handleCardClick(money)}

@@ -35,6 +35,7 @@ function FarforPage() {
             id={farfor.id} // <--- добавили id
             img={farfor.img} 
             title={farfor.title} 
+             price={farfor.price}
             isFavorite={favorites.includes(farfor.id)} // <--- проверяем
             onToggleFavorite={toggleFavorite} // <--- передаем функцию
             onClick={() => handleCardClick(farfor)}

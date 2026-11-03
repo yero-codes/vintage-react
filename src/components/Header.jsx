@@ -1,11 +1,17 @@
 import { NavLink } from 'react-router-dom';
 import { useFavorites } from '../context/FavoritesContext';
 import { useTheme } from '../context/ThemeContext';
-
+import { useCart } from '../context/CartContext';
 
 function Header() {
   const { favorites } = useFavorites();
   const { theme, toggleTheme } = useTheme();
+  
+  // Добавляем страховку на случай, если контекст не загрузился
+  const { cartItems = [] } = useCart() || {}; 
+
+
+  const totalCount = cartItems.reduce((sum, item) => sum + item.count, 0);
 
   const menuItems = [
     { to: '/', label: 'Главная' },
@@ -32,6 +38,11 @@ function Header() {
 
       <div style={{ color: '#f5efe6', marginBottom: '20px', fontSize: '18px' }}>
         ❤️ Избранное: {favorites.length}
+      </div>
+
+      {/* Блок КОРЗИНА (добавили новый div) */}
+      <div style={{ color: '#f5efe6', marginBottom: '20px', fontSize: '18px' }}>
+        🛒 Корзина: {totalCount}
       </div>
 
       <nav className="menu" aria-label="Основное меню">
