@@ -18,8 +18,8 @@ import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="container">
-      <Header />
+    <div className="app-wrapper">   {/* Главный контейнер */}
+    <div className="main-layout">   {/* Контейнер для меню и контента */}      <Header />
       <main className="content">
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -34,6 +34,7 @@ function App() {
           <Route path="/articles" element={<ArticlesPage />} />
         </Routes>
       </main>
+      </div>
 
       <AudioPlayer />
       <ScrollToTop />
