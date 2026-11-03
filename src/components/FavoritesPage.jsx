@@ -23,6 +23,7 @@ function FavoritesPage() {
               id={item.id}
               img={item.img} 
               title={item.title} 
+              price={item.price}
               isFavorite={true} // Они все избранные
               onToggleFavorite={toggleFavorite}
               onClick={() => {}} // Пока без модалки, или можно добавить
