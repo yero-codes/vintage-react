@@ -50,7 +50,9 @@ const CartPage = () => {
 
       <div className="cart-summary">
         <h3>Итого: {getTotalPrice()} ₽</h3>
-        <button className="checkout-btn">Оформить заказ</button>
+        <Link to="/checkout" className="checkout-btn" style={{ display: 'inline-block', textDecoration: 'none' }}>
+  Оформить заказ
+</Link>
       </div>
     </div>
   );

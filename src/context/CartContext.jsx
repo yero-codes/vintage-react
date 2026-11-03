@@ -36,13 +36,18 @@ export const CartProvider = ({ children }) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
+    // Очистить всю корзину
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
   // Посчитать общую сумму
   const getTotalPrice = () => {
     return cartItems.reduce((total, item) => total + (item.price * item.count), 0);
   };
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, getTotalPrice }}>
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart, getTotalPrice }}>
       {children}
     </CartContext.Provider>
   );

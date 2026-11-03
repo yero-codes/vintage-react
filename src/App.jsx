@@ -14,6 +14,7 @@ import NotFoundPage from './components/NotFoundPage';
 import ArticlesPage from './components/ArticlesPage';
 import Footer from './components/Footer'; 
 import CartPage from './components/CartPage';
+import CheckoutPage from './components/CheckoutPage';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/articles" element={<ArticlesPage />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
         </Routes>
       </main>
       </div>
