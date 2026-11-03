@@ -12,6 +12,9 @@ import FavoritesPage from './components/FavoritesPage';
 import NewsPage from './components/NewsPage';
 import NotFoundPage from './components/NotFoundPage';
 import ArticlesPage from './components/ArticlesPage';
+import Footer from './components/Footer'; 
+
+
 
 function App() {
   return (
@@ -34,6 +37,7 @@ function App() {
 
       <AudioPlayer />
       <ScrollToTop />
+      <Footer />
     </div>
   );
 }

@@ -1,0 +1,39 @@
+.site-footer {
+  background-color: #1e1e1e; /* Темный фон под стиль вашего сайта */
+  color: #e0e0e0;
+  padding: 40px 20px;
+  margin-top: 50px; /* Отступ от основного контента */
+  border-top: 1px solid #333;
+  font-family: 'Koh Santepheap', serif; /* Если подключали шрифт */
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.footer-content p {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-links a {
+  color: #A58263; /* Винтажный акцентный цвет */
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #fff;
+}
