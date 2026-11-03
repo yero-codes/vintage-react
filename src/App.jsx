@@ -13,7 +13,7 @@ import NewsPage from './components/NewsPage';
 import NotFoundPage from './components/NotFoundPage';
 import ArticlesPage from './components/ArticlesPage';
 import Footer from './components/Footer'; 
-
+import CartPage from './components/CartPage';
 
 
 function App() {
@@ -32,6 +32,7 @@ function App() {
           <Route path="/contacts" element={<ContactForm />} />
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/articles" element={<ArticlesPage />} />
+          <Route path="/cart" element={<CartPage />} />
         </Routes>
       </main>
       </div>

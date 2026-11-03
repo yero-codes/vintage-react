@@ -20,6 +20,7 @@ function Header() {
     { to: '/money', label: 'Монеты' },
     { to: '/vintagethings', label: 'Винтажные вещи' },
     { to: '/favorites', label: 'Избранное' },
+    { to: '/cart', label: 'Корзина' },
     { to: '/news', label: 'Новости' },
     { to: '/articles', label: 'Статьи' },
     { to: '/contacts', label: 'Контакты' },
