@@ -15,6 +15,8 @@ import ArticlesPage from './components/ArticlesPage';
 import Footer from './components/Footer'; 
 import CartPage from './components/CartPage';
 import CheckoutPage from './components/CheckoutPage';
+import LoginPage from './components/LoginPage';
+import ProfilePage from './components/ProfilePage';
 
 
 function App() {
@@ -35,6 +37,8 @@ function App() {
           <Route path="/articles" element={<ArticlesPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </main>
       </div>

@@ -1,7 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import { useFavorites } from '../context/FavoritesContext';
 import { useTheme } from '../context/ThemeContext';
-import { useCart } from '../context/useCart';
+import { useCart } from '../hooks/useCart';
+import { useAuth } from '../hooks/useAuth';
 
 function Header() {
   const { favorites } = useFavorites();
@@ -12,9 +13,14 @@ function Header() {
 
 
   const totalCount = cartItems.reduce((sum, item) => sum + item.count, 0);
+  
+  
+     // ...
+  const { user, logout } = useAuth();
 
   const menuItems = [
     { to: '/', label: 'Главная' },
+    { to: '/profile', label: 'Личный кабинет' },
     { to: '/books', label: 'Книги СССР' },
     { to: '/farfor', label: 'Фарфор СССР' },
     { to: '/money', label: 'Монеты' },

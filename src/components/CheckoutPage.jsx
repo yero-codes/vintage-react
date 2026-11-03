@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useCart } from '../context/useCart';
+import { useCart } from '../hooks/useCart';
 import './CheckoutPage.css';
 
 const CheckoutPage = () => {

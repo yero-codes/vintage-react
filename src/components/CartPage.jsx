@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useCart } from '../context/useCart'; // импортируем из нового файла useCart!
+import { useCart } from '../hooks/useCart'; // импортируем из нового файла useCart!
 import './CartPage.css'; 
 
 const CartPage = () => {

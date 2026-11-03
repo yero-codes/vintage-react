@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { useCart } from '../context/useCart';
+import { useCart } from '../hooks/useCart';
 
 
 const GalleryCard = memo(function GalleryCard({ id, img, title, price, isFavorite, onToggleFavorite, onClick }) {

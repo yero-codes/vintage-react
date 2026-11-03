@@ -4,6 +4,7 @@ import { HashRouter } from 'react-router-dom'
 import { FavoritesProvider } from './context/FavoritesContext'
 import { ThemeProvider } from './context/ThemeContext'
 import { CartProvider } from './context/CartContext';
+import { AuthProvider } from './context/AuthContext';
 import './index.css'
 import App from './App.jsx'
 
@@ -13,7 +14,9 @@ createRoot(document.getElementById('root')).render(
       <ThemeProvider>
         <FavoritesProvider>
            <CartProvider>
+            <AuthProvider>
           <App />
+          </AuthProvider>
           </CartProvider>
         </FavoritesProvider>
       </ThemeProvider>
