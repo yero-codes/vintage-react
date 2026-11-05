@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useCart } from '../hooks/useCart';
 import './CheckoutPage.css';
+import { supabase } from '../supabaseClient';
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
@@ -26,18 +27,48 @@ const CheckoutPage = () => {
     );
   }
 
-  const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
     e.preventDefault(); // Останавливаем перезагрузку страницы
 
-    // Простейшая проверка на заполнение
+    // Проверка на заполнение
     if (!name || !phone || !address) {
       alert('Пожалуйста, заполните все поля');
       return;
     }
 
-    // Имитация отправки на сервер
-    console.log('Заказ отправлен:', { name, phone, address, items: cartItems, total: getTotalPrice() });
+    try {
+      // Получаем текущего пользователя
+      const { data: { user } } = await supabase.auth.getUser();
 
+      if (!user) {
+        alert('Вы должны войти в аккаунт, чтобы оформить заказ!');
+        navigate('/login');
+        return;
+      }
+
+      // Формируем данные для отправки
+      const orderData = {
+        user_id: user.id,          // Привязываем заказ к ID пользователя
+        items: cartItems,          // Сохраняем весь массив товаров
+        total: getTotalPrice()     // Сохраняем общую сумму
+      };
+
+      // Отправляем запрос в Supabase
+      const { error } = await supabase
+        .from('orders')
+        .insert([orderData]);
+
+      if (error) throw error;
+
+      // Если всё хорошо — очищаем корзину и показываем успех
+      clearCart();
+      setIsSuccess(true);
+      
+    } catch (error) {
+      console.error('Ошибка при создании заказа:', error);
+      alert('Не удалось оформить заказ: ' + error.message);
+    }
+  
     // Очищаем корзину и показываем успех
     clearCart(); 
     setIsSuccess(true);
