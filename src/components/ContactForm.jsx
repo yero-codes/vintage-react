@@ -27,10 +27,10 @@ function ContactForm() {
   };
 
   // Обработчик отправки
-  const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Проверяем все поля, чтобы обновить errors
+    // Проверяем все поля
     validateField('name', name);
     validateField('email', email);
     validateField('message', message);
@@ -40,31 +40,18 @@ function ContactForm() {
       return;
     }
 
+    // --- ДЕМО-РЕЖИМ (без отправки на сервер) ---
     setStatus('Отправка...');
 
-    try {
-      const response = await fetch('https://formspree.io/f/mgaokqoe', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({ name, email, message }),
-      });
-
-      if (response.ok) {
-        setStatus('Форма успешно отправлена!');
-        setName('');
-        setEmail('');
-        setMessage('');
-        setAgreed(false); // Сбрасываем галочку
-        setErrors({}); // Очищаем ошибки
-      } else {
-        setStatus('Ошибка при отправке. Попробуйте позже.');
-      }
-    } catch (error) {
-      setStatus('Ошибка сети. Проверьте интернет.');
-    }
+    // Имитируем задержку сети (1 секунда), чтобы было похоже на реальную отправку
+    setTimeout(() => {
+      setStatus('Форма успешно отправлена! (Демо-режим)');
+      setName('');
+      setEmail('');
+      setMessage('');
+      setAgreed(false);
+      setErrors({});
+    }, 1000);
   };
 
   return (
